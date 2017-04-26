@@ -1,6 +1,6 @@
 // Setup initial game stats
 var score = 0;
-var lives = 2;
+var lives = 10;
 var powerPellets = 4;
 
 
@@ -62,7 +62,9 @@ function displayStats() {
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
-  console.log('(p) Eat Power-Pellet')
+  if (powerPellets > 0) {
+    console.log('(p) Eat Power-Pellet');
+  }
   console.log('(d) Eat Dot');
   ghosts.forEach(displayGhost);
   console.log('(q) Quit');
@@ -72,6 +74,7 @@ function displayPrompt() {
   // process.stdout.write is similar to console.log except it doesn't add a new line after the text
   process.stdout.write('\nWaka Waka :v '); // :v is the Pac-Man emoji.
 }
+
 
 function displayGhost(element, index, ghosts) {
   console.log('(' + element.menu_option + ') Eat ' + element.name);
@@ -85,16 +88,35 @@ function eatDot() {
 
 function eatGhost(ghost) {
   if (ghost.edible === false) {
-    console.log('\nYou have been killed by ' + ghost.name + ' who is the colour ' + ghost.colour)
+    console.log('\nYou have been killed by ' + ghost.name + ' who is the colour ' + ghost.colour);
     lives -= 1;
   }
-  displayStats();
+  else {
+    console.log('\nYou have eaten ' + ghost.name + ' who is ' + ghost.character);
+    score += 200;
+    ghost.edible = false;
+  }
   checkLives();
+}
+
+function eatPowerPellet() {
+  if (powerPellets > 0) {
+    console.log('\nAte Power Pellet!');
+    powerPellets -= 1;
+    score += 50;
+    ghosts.forEach(function(ghost) {
+      ghost.edible = true;
+    });
+  }
+  else {
+    console.log('\nNo more power pellets!');
+  }
 }
 
 
 function checkLives() {
   if (lives === 0) {
+    displayStats();
     process.exit();
   }
 }
@@ -103,6 +125,9 @@ function checkLives() {
 function processInput(key) {
   switch(key) {
     case '\u0003': // This makes it so CTRL-C will quit the program
+    case 'p':
+      eatPowerPellet();
+      break;
     case 'q':
       process.exit();
       break;
@@ -145,7 +170,7 @@ drawScreen();
 stdin.on('data', function(key) {
   process.stdout.write(key);
   processInput(key);
-  setTimeout(drawScreen, 3000); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
+  setTimeout(drawScreen, 500); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
 });
 
 // Player Quits
