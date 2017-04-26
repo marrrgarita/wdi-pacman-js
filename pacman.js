@@ -63,6 +63,7 @@ function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
   console.log('(q) Quit');
+  console.log(ghosts.forEach(displayGhost));
 }
 
 function displayPrompt() {
@@ -70,12 +71,16 @@ function displayPrompt() {
   process.stdout.write('\nWaka Waka :v '); // :v is the Pac-Man emoji.
 }
 
+function displayGhost(element, index, ghosts) {
+  console.log('(' + element.menu_option + ') Eat ' + element.name)
+}
 
 // Menu Options
 function eatDot() {
   console.log('\nChomp!');
   score += 10;
 }
+
 
 
 // Process Player's Input
