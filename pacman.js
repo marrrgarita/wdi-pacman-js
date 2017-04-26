@@ -77,7 +77,12 @@ function displayPrompt() {
 
 
 function displayGhost(element, index, ghosts) {
-  console.log('(' + element.menu_option + ') Eat ' + element.name);
+  if (element.edible === false) {
+    console.log('(' + element.menu_option + ') Eat ' + element.name + '(inedible)');
+  }
+  else if (element.edible === true) {
+    console.log('(' + element.menu_option + ') Eat ' + element.name + '(edible)');
+  }
 }
 
 // Menu Options
