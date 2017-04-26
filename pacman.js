@@ -57,11 +57,12 @@ function clearScreen() {
 }
 
 function displayStats() {
-  console.log('Score: ' + score + '     Lives: ' + lives);
+  console.log('Score: ' + score + '     Lives: ' + lives + '     Power Pellets: ' + powerPellets);
 }
 
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
+  console.log('(p) Eat Power-Pellet')
   console.log('(d) Eat Dot');
   ghosts.forEach(displayGhost);
   console.log('(q) Quit');
