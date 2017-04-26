@@ -62,8 +62,8 @@ function displayStats() {
 function displayMenu() {
   console.log('\n\nSelect Option:\n');  // each \n creates a new line
   console.log('(d) Eat Dot');
+  ghosts.forEach(displayGhost);
   console.log('(q) Quit');
-  console.log(ghosts.forEach(displayGhost));
 }
 
 function displayPrompt() {
@@ -72,7 +72,7 @@ function displayPrompt() {
 }
 
 function displayGhost(element, index, ghosts) {
-  console.log('(' + element.menu_option + ') Eat ' + element.name)
+  console.log('(' + element.menu_option + ') Eat ' + element.name);
 }
 
 // Menu Options
