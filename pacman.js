@@ -37,7 +37,7 @@ var clyde = {
   edible: false
 };
 
-
+var ghosts = [inky, blinky, pinky, clyde]
 // replace this comment with your four ghosts setup as objects
 
 
