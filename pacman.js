@@ -1,6 +1,7 @@
 // Setup initial game stats
 var score = 0;
 var lives = 2;
+var powerPellets = 4;
 
 
 // Define your ghosts here
@@ -83,11 +84,19 @@ function eatDot() {
 
 function eatGhost(ghost) {
   if (ghost.edible === false) {
-    lives -= 1
+    console.log('\nYou have been killed by ' + ghost.name + ' who is the colour ' + ghost.colour)
+    lives -= 1;
   }
+  displayStats();
+  checkLives();
 }
 
 
+function checkLives() {
+  if (lives === 0) {
+    process.exit();
+  }
+}
 
 // Process Player's Input
 function processInput(key) {
@@ -109,12 +118,13 @@ function processInput(key) {
       eatGhost(pinky);
       break;
     case '4':
-      eatGhost(clyde)
+      eatGhost(clyde);
       break;
     default:
       console.log('\nInvalid Command!');
   }
 }
+
 
 
 //
@@ -134,7 +144,7 @@ drawScreen();
 stdin.on('data', function(key) {
   process.stdout.write(key);
   processInput(key);
-  setTimeout(drawScreen, 300); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
+  setTimeout(drawScreen, 3000); // The command prompt will flash a message for 300 milliseoncds before it re-draws the screen. You can adjust the 300 number to increase this.
 });
 
 // Player Quits
