@@ -3,6 +3,7 @@ var score = 0;
 var lives = 5;
 var powerPellets = 4;
 var dots = 240;
+var ghostsEaten = 0;
 
 // Define your ghosts here
 
@@ -128,8 +129,22 @@ function eatGhost(ghost) {
   }
   else {
     console.log('\nYou have eaten ' + ghost.name + ' who is ' + ghost.character);
-    score += 200;
+    ghostsEaten += 1;
     ghost.edible = false;
+    switch (ghostsEaten) {
+      case 1:
+        score += 200;
+        break;
+      case 2:
+        score += 400;
+        break;
+      case 3:
+        score += 800;
+        break;
+      case 4:
+        score += 1600;
+        ghostsEaten = 0;
+    }
   }
   checkLives();
 }
