@@ -12,7 +12,7 @@ var inky = {
   name: 'Inky',
   colour: 'Red',
   character: 'Shadow',
-  edible: false
+
 };
 
 var blinky = {
